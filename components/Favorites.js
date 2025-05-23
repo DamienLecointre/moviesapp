@@ -1,7 +1,8 @@
-import { Navigation } from "./Navigation";
+import React from "react";
 import styles from "../styles/Home.module.css";
+import { Navigation } from "./Navigation";
 
-function Home() {
+export const Favorites = () => {
   return (
     <>
       <main className={styles.main}>
@@ -12,6 +13,4 @@ function Home() {
       </main>
     </>
   );
-}
-
-export default Home;
+};
