@@ -3,40 +3,72 @@ import Image from "next/image";
 import styles from "../styles/Cards.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { addFavoritesToStore } from "../reducers/favorites";
 
 export const Cards = (props) => {
   // console.log(moviesData);
+  const dispatch = useDispatch();
+
+  const addFavorites = (newFavorite) => {
+    dispatch(addFavoritesToStore(newFavorite));
+  };
   const genreData = props.genres;
-  // const averagedata = props.voteAverage;
 
   return (
     <li className={styles.card}>
       <Image
         className={styles.img}
-        src={props.poster}
+        src={
+          props.poster === "https://image.tmdb.org/t/p/w500/null"
+            ? "/poster.jpg"
+            : props.poster
+        }
         alt={props.title}
         height={300}
         width={220}
       />
-      <h1 className={styles.title}>{props.title}</h1>
-      <p className={styles.text}>Sorti le : {props.date}</p>
+      <h1 className={styles.title}>
+        {props.title === null ? "Titre inconnu" : props.title}
+      </h1>
+      <p className={styles.text}>
+        Sorti le :{props.date === null ? "Date de sortie inconnue" : props.date}
+      </p>
       <div className={styles.averageContainer}>
-        <h3 className={styles.averageText}>{props.voteAverage}</h3>
-        <FontAwesomeIcon
-          className={styles.averageIcon}
-          icon={faStar}
-          size="1rem"
-        />
+        <h3 className={styles.averageText}>
+          {props.voteAverage === null
+            ? "Ce film n'a pas de note moyenne"
+            : props.voteAverage}{" "}
+          / 10
+        </h3>
+        {props.voteAverage && (
+          <FontAwesomeIcon
+            className={styles.averageIcon}
+            icon={faStar}
+            size="10px"
+          />
+        )}
       </div>
       <ul className={styles.genreContainer}>
-        {genreData.map((type) => (
-          <li key={type} className={styles.genre}>
-            {type}
-          </li>
-        ))}
+        {genreData === undefined
+          ? null
+          : genreData.map((type) => (
+              <li key={type} className={styles.genre}>
+                {type}
+              </li>
+            ))}
       </ul>
-      <p className={styles.text}>{props.overview}</p>
-      <button className={styles.btnFavorite}>Ajouter aux coups de coeur</button>
+      <p className={styles.text}>
+        {props.overview === null
+          ? "Pas de résumé pour ce film"
+          : props.overview}
+      </p>
+      <button
+        className={styles.btnFavorite}
+        onClick={() => addFavorites(props)}
+      >
+        Ajouter aux coups de coeur
+      </button>
     </li>
   );
 };

@@ -14,16 +14,16 @@
   margin: 5px;
 }
 
+.img {
+  border-radius: 20px;
+  margin: 20px 0;
+}
+
 .title {
   width: 100%;
   font-size: 1rem;
   font-weight: 800;
   letter-spacing: 1px;
-}
-
-.img {
-  border-radius: 20px;
-  margin: 20px 0;
 }
 
 .text {
@@ -71,10 +71,17 @@
   position: absolute;
   bottom: 5%;
   outline: none;
-  border: none;
+  border: 1px solid #546FE4;
   font-size: .7rem;
   background: #546FE4;
   border-radius: 10px;
   padding: 20px;
   cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.btnFavorite:hover {
+  transform: scale(1.1);
+  border: 1px solid #546FE4;
+  background: #212040;
 }

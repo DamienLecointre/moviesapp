@@ -1,0 +1,46 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerContainer {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 25% 50% 25%;
+  align-items: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.subtitleContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.subtitleIcon {
+  font-size: 1.2rem;
+  color: red;
+  margin-left: 10px;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}

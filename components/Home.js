@@ -10,17 +10,10 @@ function Home() {
   const [search, setSearch] = useState(null);
   const [moviesData, setMoviesData] = useState([]);
   const [genresMap, setGenresMap] = useState({});
-  const searchDone = (searchInput) => {
-    // console.log("recherche :", search);
-    setSearch(searchInput);
-  };
 
-  // useEffect(() => {
-  //   fetch(
-  //     `https://api.themoviedb.org/3/discover/movie?api_key=${TMDBAPIKEY}&language=fr-FR`
-  //   ).then((res) => res.json().then((data) => setMoviesData(data.results)));
-  // }, []);
-  // console.log("voici la recherche qd search null :", moviesData);
+  // ---------------------------
+  //RECHERCHE DES GENRES DE FILM
+  // ---------------------------
 
   useEffect(() => {
     fetch(
@@ -36,6 +29,51 @@ function Home() {
       });
   }, []);
 
+  // ------------------------------------------------------
+  //AFFICHAGE D'UNE SELECTION DE FILM AU LOADING DE LA PAGE
+  // ------------------------------------------------------
+
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${TMDBAPIKEY}&language=fr-FR`
+    ).then((res) =>
+      res.json().then((data) => {
+        const formatedData = data.results.slice(0, 12).map((movie) => {
+          const poster = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+          const dateStr = movie.release_date;
+          const parts = dateStr.split("-").reverse();
+          const invertedDate = parts.join("/");
+          const averageData = movie.vote_average;
+          const formatedAverage = averageData.toFixed(1);
+          const genreNames = (movie.genre_ids || []).map((id) => genresMap[id]);
+          let overview = movie.overview;
+          if (overview.length > 250) {
+            overview = overview.substring(0, 250) + "...";
+          }
+
+          return {
+            poster,
+            title: movie.title,
+            date: invertedDate,
+            voteAverage: formatedAverage,
+            genres: genreNames,
+            overview,
+          };
+        });
+        setMoviesData(formatedData);
+      })
+    );
+  }, []);
+
+  // ------------------------------------
+  //AFFICHAGE DU RESULTAT DE LA RECHERCHE
+  // ------------------------------------
+
+  const searchDone = (searchInput) => {
+    // console.log("recherche :", search);
+    setSearch(searchInput);
+  };
+
   useEffect(() => {
     if (search === null) {
       return;
@@ -47,8 +85,7 @@ function Home() {
         .then((data) => {
           console.log("data brut :", data.results);
 
-          const formatedData = data.results.map((movie) => {
-            console.log(typeof movie.vote_average);
+          const formatedData = data.results.slice(0, 12).map((movie) => {
             const poster = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
             const dateStr = movie.release_date;
             const parts = dateStr.split("-").reverse();
@@ -82,6 +119,10 @@ function Home() {
   console.log("voici la recherche :", search);
 
   // 'https://api.themoviedb.org/3/search/movie?query=Jack+Reacher'
+
+  // -----------------
+  //AFFICHAGE DES CARDS
+  // ------------------
 
   const moviesCards = moviesData.map((data, index) => {
     return (
