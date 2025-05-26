@@ -1,0 +1,23 @@
+.linkContainer {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+}
+
+.link {
+  height: 30px;
+  min-height: 30px;
+  width: 100%;
+  max-width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: all .2s ease-in-out;
+}
+
+.link.active {
+  background: #546FE4;
+  border-radius: 10px;
+}

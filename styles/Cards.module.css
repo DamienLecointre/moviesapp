@@ -1,0 +1,80 @@
+.card {
+  position: relative;
+  height: 100%;
+  min-height: 800px;
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 0 15%;
+  background: #060D2C;
+  border-radius: 30px;
+  padding: 20px;
+  margin: 5px;
+}
+
+.title {
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.img {
+  border-radius: 20px;
+  margin: 20px 0;
+}
+
+.text {
+  width: 100%;
+  font-size: .9rem;
+  text-align: left;
+  color: #6a6a6a;
+  margin: 20px 0;
+}
+
+.averageContainer {
+  width: 100%;
+  display: flex;
+  /* align-items: center; */
+  margin-bottom: 20px;
+}
+
+.averageText {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.averageIcon {
+  color: #fff200;
+  margin-left: 5px;
+}
+
+.genreContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.genre {
+  font-size: .7rem;
+  background: #212040;
+  border-radius: 10px;
+  padding: 8px;
+  margin: 5px;
+}
+
+.btnFavorite {
+  position: absolute;
+  bottom: 5%;
+  outline: none;
+  border: none;
+  font-size: .7rem;
+  background: #546FE4;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+}

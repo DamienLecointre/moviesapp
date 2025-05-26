@@ -1,0 +1,27 @@
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.searchInput {
+  outline: none;
+  border: none;
+  color: #141414;
+  border-radius: 10px 10px 0 0;
+  padding: 10px 20px;
+}
+
+.searchInput[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+.searchBtn {
+  background: #546FE4;
+  border: none;
+  border-radius: 0 0 10px 10px ;
+  padding: 10px 20px;
+  cursor: pointer;
+}
