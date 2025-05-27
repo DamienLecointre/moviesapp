@@ -26,6 +26,7 @@ function Home() {
           map[genre.id] = genre.name;
         });
         setGenresMap(map);
+        console.log(genresMap);
       });
   }, []);
 
@@ -34,6 +35,7 @@ function Home() {
   // ------------------------------------------------------
 
   useEffect(() => {
+    if (Object.keys(genresMap).length === 0) return;
     fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${TMDBAPIKEY}&language=fr-FR`
     ).then((res) =>
@@ -63,7 +65,7 @@ function Home() {
         setMoviesData(formatedData);
       })
     );
-  }, []);
+  }, [genresMap]);
 
   // ------------------------------------
   //AFFICHAGE DU RESULTAT DE LA RECHERCHE
@@ -75,46 +77,41 @@ function Home() {
   };
 
   useEffect(() => {
-    if (search === null) {
-      return;
-    } else {
-      fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${TMDBAPIKEY}&query=${search}&language=fr-FR`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          console.log("data brut :", data.results);
+    if (search === null || Object.keys(genresMap).length === 0) return;
+    fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${TMDBAPIKEY}&query=${search}&language=fr-FR`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("data brut :", data.results);
 
-          const formatedData = data.results.slice(0, 12).map((movie) => {
-            const poster = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
-            const dateStr = movie.release_date;
-            const parts = dateStr.split("-").reverse();
-            const invertedDate = parts.join("/");
-            const averageData = movie.vote_average;
-            const formatedAverage = averageData.toFixed(1);
-            const genreNames = (movie.genre_ids || []).map(
-              (id) => genresMap[id]
-            );
-            let overview = movie.overview;
-            if (overview.length > 250) {
-              overview = overview.substring(0, 250) + "...";
-            }
+        const formatedData = data.results.slice(0, 12).map((movie) => {
+          const poster = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+          const dateStr = movie.release_date;
+          const parts = dateStr.split("-").reverse();
+          const invertedDate = parts.join("/");
+          const averageData = movie.vote_average;
+          const formatedAverage = averageData.toFixed(1);
+          const genreNames = (movie.genre_ids || []).map((id) => genresMap[id]);
+          let overview = movie.overview;
+          if (overview.length > 250) {
+            overview = overview.substring(0, 250) + "...";
+          }
 
-            return {
-              poster,
-              title: movie.title,
-              date: invertedDate,
-              voteAverage: formatedAverage,
-              genres: genreNames,
-              overview,
-            };
-          });
-          // setMoviesData(formatedData);
-          setMoviesData(formatedData);
-          console.log("voici formatedData :", moviesData);
+          return {
+            poster,
+            title: movie.title,
+            date: invertedDate,
+            voteAverage: formatedAverage,
+            genres: genreNames,
+            overview,
+          };
         });
-    }
-  }, [search]);
+        // setMoviesData(formatedData);
+        setMoviesData(formatedData);
+        console.log("voici formatedData :", moviesData);
+      });
+  }, [search, genresMap]);
   console.log("Voici moviesData après fetch :", moviesData);
   console.log("voici la recherche :", search);
 
@@ -134,6 +131,7 @@ function Home() {
         voteAverage={data.voteAverage}
         genres={data.genres}
         overview={data.overview}
+        isHomePage={true}
       />
     );
   });

@@ -7,12 +7,12 @@ import { useDispatch } from "react-redux";
 import { addFavoritesToStore } from "../reducers/favorites";
 
 export const Cards = (props) => {
-  // console.log(moviesData);
   const dispatch = useDispatch();
 
   const addFavorites = (newFavorite) => {
     dispatch(addFavoritesToStore(newFavorite));
   };
+
   const genreData = props.genres;
 
   return (
@@ -36,16 +36,13 @@ export const Cards = (props) => {
       </p>
       <div className={styles.averageContainer}>
         <h3 className={styles.averageText}>
-          {props.voteAverage === null
-            ? "Ce film n'a pas de note moyenne"
-            : props.voteAverage}{" "}
-          / 10
+          {props.voteAverage === null ? "-" : props.voteAverage}/ 10
         </h3>
         {props.voteAverage && (
           <FontAwesomeIcon
             className={styles.averageIcon}
             icon={faStar}
-            size="10px"
+            size="10px" //<= A corriger ex : "2xs","xs","sm","lg","xl","2xl","1x","2x","3x","4x","5x","6x","7x","8x","9x","10x"
           />
         )}
       </div>
@@ -58,16 +55,21 @@ export const Cards = (props) => {
               </li>
             ))}
       </ul>
-      <p className={styles.text}>
-        {props.overview === null
-          ? "Pas de résumé pour ce film"
-          : props.overview}
-      </p>
+      <div className={styles.synopsisContainer}>
+        <h3 className={styles.averageText}>Synopsis</h3>
+        <p className={styles.text}>
+          {props.overview === null
+            ? "Pas de résumé pour ce film"
+            : props.overview}
+        </p>
+      </div>
       <button
         className={styles.btnFavorite}
-        onClick={() => addFavorites(props)}
+        onClick={props.isHomePage ? () => addFavorites(props) : props.onClick}
       >
-        Ajouter aux coups de coeur
+        {props.isHomePage
+          ? "Ajouter aux coups de coeur"
+          : "Suprimer des coups de coeur"}
       </button>
     </li>
   );

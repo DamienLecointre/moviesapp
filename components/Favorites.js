@@ -5,13 +5,28 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import styles from "../styles/Favorites.module.css";
 import { useSelector } from "react-redux";
 import { Cards } from "./Cards";
+import { useDispatch } from "react-redux";
+import { removeFavoritesToStore } from "../reducers/favorites";
 
-export const Favorites = () => {
+export const Favorites = (props) => {
   const favorite = useSelector((state) => state.favorites.value);
+  const dispatch = useDispatch();
+
+  const handleRemoveFavorite = (favoriteToRemove) => {
+    dispatch(removeFavoritesToStore(favoriteToRemove));
+  };
+
   let favorites = <p>pas encore de favories</p>;
   if (favorite.length > 0) {
     favorites = favorite.map((data, i) => {
-      return <Cards key={i} {...data} />;
+      return (
+        <Cards
+          key={i}
+          {...data}
+          isHomePage={false}
+          onClick={() => handleRemoveFavorite(data)}
+        />
+      );
     });
   }
   return (
