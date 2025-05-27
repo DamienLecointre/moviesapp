@@ -1,0 +1,17 @@
+.btnContainer {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.btnWrapper {
+  outline: none;
+  border: none;
+  background: #546FE4;
+  border-radius: 150px;
+  padding: 10px 30px;
+  cursor: pointer;
+}
+
+.icon {
+  margin-left: 5px;
+}

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Cards } from "./Cards";
 import { Search } from "./Search";
 import styles from "../styles/Home.module.css";
+import { Sort } from "./Sort";
 
 const TMDBAPIKEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
@@ -26,7 +27,7 @@ function Home() {
           map[genre.id] = genre.name;
         });
         setGenresMap(map);
-        console.log(genresMap);
+        // console.log(genresMap);
       });
   }, []);
 
@@ -83,7 +84,7 @@ function Home() {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log("data brut :", data.results);
+        // console.log("data brut :", data.results);
 
         const formatedData = data.results.slice(0, 12).map((movie) => {
           const poster = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
@@ -109,11 +110,11 @@ function Home() {
         });
         // setMoviesData(formatedData);
         setMoviesData(formatedData);
-        console.log("voici formatedData :", moviesData);
+        // console.log("voici formatedData :", moviesData);
       });
   }, [search, genresMap]);
-  console.log("Voici moviesData après fetch :", moviesData);
-  console.log("voici la recherche :", search);
+  // console.log("Voici moviesData après fetch :", moviesData);
+  // console.log("voici la recherche :", search);
 
   // 'https://api.themoviedb.org/3/search/movie?query=Jack+Reacher'
 
@@ -136,6 +137,17 @@ function Home() {
     );
   });
 
+  // ------------
+  //TRI DES CARDS
+  // ------------
+
+  const selectedBtnSort = (btnName) => {
+    console.log(btnName, moviesData);
+    if (btnName === "Top") {
+      setMoviesData(moviesData.sort((a, b) => a.title - b.title));
+    }
+  };
+
   return (
     <>
       <main className={styles.main}>
@@ -144,6 +156,7 @@ function Home() {
           <h1 className={styles.title}>Movies App</h1>
         </div>
         <Search searchDone={searchDone} />
+        <Sort selectedBtnSort={selectedBtnSort} />
         <ul className={styles.cardsContainer}>{moviesCards}</ul>
       </main>
     </>
