@@ -16,7 +16,7 @@ export const Favorites = (props) => {
     dispatch(removeFavoritesToStore(favoriteToRemove));
   };
 
-  let favorites = <p>pas encore de favories</p>;
+  let favorites = <p className={styles.text}>Pas encore de favoris</p>;
   if (favorite.length > 0) {
     favorites = favorite.map((data, i) => {
       return (

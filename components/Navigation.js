@@ -9,7 +9,7 @@ export const Navigation = () => {
   const activePath = router.pathname;
 
   return (
-    <div className={styles.linkContainer}>
+    <nav className={styles.linkContainer}>
       <Link
         href="/home"
         // onClick={() => setActiveLink("home")}
@@ -28,6 +28,6 @@ export const Navigation = () => {
       >
         Mes favories
       </Link>
-    </div>
+    </nav>
   );
 };

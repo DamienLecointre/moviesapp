@@ -13,7 +13,7 @@ function Home() {
   const [genresMap, setGenresMap] = useState({});
 
   // ---------------------------
-  //RECHERCHE DES GENRES DE FILM
+  //FORMATAGE DES GENRES DE FILM
   // ---------------------------
 
   useEffect(() => {
@@ -108,7 +108,6 @@ function Home() {
             overview,
           };
         });
-        // setMoviesData(formatedData);
         setMoviesData(formatedData);
         // console.log("voici formatedData :", moviesData);
       });
@@ -142,10 +141,16 @@ function Home() {
   // ------------
 
   const selectedBtnSort = (btnName) => {
-    console.log(btnName, moviesData);
     if (btnName === "Top") {
-      setMoviesData(moviesData.sort((a, b) => a.title - b.title));
+      setMoviesData(
+        [...moviesData].sort((a, b) => b.voteAverage - a.voteAverage)
+      );
+    } else if (btnName === "Flop") {
+      setMoviesData(
+        [...moviesData].sort((a, b) => a.voteAverage - b.voteAverage)
+      );
     }
+    // console.log(btnName, moviesData);
   };
 
   return (

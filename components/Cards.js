@@ -29,14 +29,22 @@ export const Cards = (props) => {
         width={220}
       />
       <h1 className={styles.title}>
-        {props.title === null ? "Titre inconnu" : props.title}
+        {props.title === null || props.title === ""
+          ? "Titre inconnu"
+          : props.title}
       </h1>
       <p className={styles.text}>
-        Sorti le :{props.date === null ? "Date de sortie inconnue" : props.date}
+        Sorti le :
+        {props.date === null || props.date === ""
+          ? "Date de sortie inconnue"
+          : props.date}
       </p>
       <div className={styles.averageContainer}>
         <h3 className={styles.averageText}>
-          {props.voteAverage === null ? "-" : props.voteAverage}/ 10
+          {props.voteAverage === null || props.voteAverage === ""
+            ? "-"
+            : props.voteAverage}
+          / 10
         </h3>
         {props.voteAverage && (
           <FontAwesomeIcon
@@ -58,7 +66,7 @@ export const Cards = (props) => {
       <div className={styles.synopsisContainer}>
         <h3 className={styles.averageText}>Synopsis</h3>
         <p className={styles.text}>
-          {props.overview === null
+          {props.overview === null || props.overview === ""
             ? "Pas de résumé pour ce film"
             : props.overview}
         </p>

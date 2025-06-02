@@ -1,7 +1,8 @@
 .linkContainer {
-display: flex;
-flex-wrap: wrap;
-justify-content: space-between;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .link {
@@ -14,10 +15,21 @@ justify-content: space-between;
   justify-content: center;
   cursor: pointer;
   padding: 10px 20px;
+  margin-top: 20px;
   transition: all .2s ease-in-out;
 }
 
 .link.active {
   background: #546FE4;
   border-radius: 10px;
+}
+
+/* ----------
+MEDIA QUERIES
+------------- */
+
+@media (max-width: 770px) {
+  .linkContainer {
+    justify-content: center;
+  }
 }

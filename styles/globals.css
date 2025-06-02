@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 body {
   background: #212040;
-  margin: 20px 80px;
+  margin: 0 80px 20px;
   color: #f1f1f1;
 }
 
@@ -16,4 +16,14 @@ body {
 
 button, a {
   color: #f1f1f1;
+}
+
+/* ----------
+MEDIA QUERIES
+------------- */
+
+@media (max-width: 400px) {
+  body {
+    margin: 0 50px 20px;
+  }
 }

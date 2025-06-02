@@ -1,3 +1,8 @@
+.text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #6a6a6a;
+}
 .main {
   display: flex;
   flex-direction: column;
@@ -18,6 +23,7 @@
   font-weight: 500;
   letter-spacing: 1px;
   text-align: center;
+  margin-top: 20px;
 }
 
 .subtitleContainer {
@@ -43,4 +49,5 @@
 .cardsContainer {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
