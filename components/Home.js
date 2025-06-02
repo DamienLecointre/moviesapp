@@ -55,6 +55,7 @@ function Home() {
           }
 
           return {
+            id: movie.id,
             poster,
             title: movie.title,
             date: invertedDate,
@@ -100,6 +101,7 @@ function Home() {
           }
 
           return {
+            id: movie.id,
             poster,
             title: movie.title,
             date: invertedDate,
@@ -109,7 +111,7 @@ function Home() {
           };
         });
         setMoviesData(formatedData);
-        // console.log("voici formatedData :", moviesData);
+        console.log("voici formatedData :", moviesData);
       });
   }, [search, genresMap]);
   // console.log("Voici moviesData après fetch :", moviesData);
@@ -121,10 +123,11 @@ function Home() {
   //AFFICHAGE DES CARDS
   // ------------------
 
-  const moviesCards = moviesData.map((data, index) => {
+  const moviesCards = moviesData.map((data, i) => {
     return (
       <Cards
-        key={index}
+        key={i}
+        id={data.id}
         poster={data.poster}
         title={data.title}
         date={data.date}

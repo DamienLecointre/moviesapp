@@ -27,6 +27,7 @@ export const Cards = (props) => {
         alt={props.title}
         height={300}
         width={220}
+        style={{ height: "auto" }}
       />
       <h1 className={styles.title}>
         {props.title === null || props.title === ""

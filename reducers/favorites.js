@@ -10,9 +10,9 @@ export const favoritesSlice = createSlice({
   initialState,
   reducers: {
     addFavoritesToStore: (state, action) => {
-      console.log("add favorites :", action.payload.title);
+      // console.log("add favorites :", action.payload.id);
       const alreadyExists = state.value.some(
-        (card) => card.title === action.payload.title
+        (card) => card.id === action.payload.id
       );
 
       if (!alreadyExists && action.payload.title) {
