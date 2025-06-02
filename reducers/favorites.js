@@ -15,7 +15,7 @@ export const favoritesSlice = createSlice({
         (card) => card.id === action.payload.id
       );
 
-      if (!alreadyExists && action.payload.title) {
+      if (!alreadyExists && action.payload.id) {
         state.value.push(action.payload);
       } else {
         alert("Ce film est déjà dans vos favoris");
@@ -23,9 +23,7 @@ export const favoritesSlice = createSlice({
     },
     removeFavoritesToStore: (state, action) => {
       console.log("favorites remove :", action.payload);
-      state.value = state.value.filter(
-        (card) => card.title !== action.payload.title
-      );
+      state.value = state.value.filter((card) => card.id !== action.payload.id);
     },
   },
 });
