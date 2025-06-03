@@ -22,7 +22,7 @@ export const favoritesSlice = createSlice({
       }
     },
     removeFavoritesToStore: (state, action) => {
-      console.log("favorites remove :", action.payload);
+      // console.log("favorites remove :", action.payload);
       state.value = state.value.filter((card) => card.id !== action.payload.id);
     },
   },
